@@ -320,6 +320,7 @@ export class CodeRuntime {
         let node = {
           onClean: (v) => {
             runtime.mini.onClean(v);
+            parent.mini.onClean(v);
           },
           onLoop: (v) => {
             runtime.mini.onLoop(v);

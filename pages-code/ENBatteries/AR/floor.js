@@ -318,14 +318,23 @@ export class Floor {
       controls.update();
 
       controls.enableDamping = true;
-      controls.enablePan = false;
+      controls.enablePan = true;
       controls.enableRotate = true;
-      controls.enableZoom = false;
+      controls.enableZoom = true;
 
       this.node.onLoop(() => {
         controls.update();
         camera.rotation.copy(fakeCam.rotation);
+        camera.position.copy(fakeCam.position);
       });
+
+      window.addEventListener(
+        "add-object-one-time",
+        ({ detail: { birthPlace, cameraPosition } }) => {
+          //
+          controls.target.copy(birthPlace);
+        }
+      );
     }
 
     //
