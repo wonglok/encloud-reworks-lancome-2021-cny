@@ -311,6 +311,7 @@ export class Floor {
       );
     } else {
       let fakeCam = new Camera();
+      fakeCam.position.copy(camera.position);
       fakeCam.rotation.copy(camera.rotation);
 
       let controls = new OrbitControls(fakeCam, renderer.domElement);
@@ -323,16 +324,8 @@ export class Floor {
 
       this.node.onLoop(() => {
         controls.update();
-        camera.position.copy(fakeCam.position);
+        camera.rotation.copy(fakeCam.rotation);
       });
-
-      window.addEventListener(
-        "add-object-one-time",
-        ({ detail: { birthPlace, cameraPosition } }) => {
-          //
-          controls.target.copy(birthPlace);
-        }
-      );
     }
 
     //
