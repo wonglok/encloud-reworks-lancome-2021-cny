@@ -311,20 +311,18 @@ export class Floor {
       );
     } else {
       let fakeCam = new Camera();
-      fakeCam.position.copy(camera.position);
       fakeCam.rotation.copy(camera.rotation);
 
       let controls = new OrbitControls(fakeCam, renderer.domElement);
       controls.update();
 
       controls.enableDamping = true;
-      controls.enablePan = true;
+      controls.enablePan = false;
       controls.enableRotate = true;
-      controls.enableZoom = true;
+      controls.enableZoom = false;
 
       this.node.onLoop(() => {
         controls.update();
-        camera.rotation.copy(fakeCam.rotation);
         camera.position.copy(fakeCam.position);
       });
 
